@@ -4,8 +4,8 @@ import string
 from collections import Counter
 
 
-wordle_words = pd.read_csv('wordle_words.csv')
-column_probabilities = pd.read_csv('column_probabilities.csv')
+wordle_words = pd.read_csv('Word Data/wordle_words.csv')
+column_probabilities = pd.read_csv('Word Data/column_probabilities.csv')
 wordle_words = wordle_words.sort_values("log_likelihood", ascending=False)
 
 known_count = {}
