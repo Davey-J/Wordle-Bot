@@ -4,14 +4,12 @@ import string
 from collections import Counter
 
 
-wordle_words = pd.read_csv('Word Data/wordle_words.csv')
-column_probabilities = pd.read_csv('Word Data/column_probabilities.csv')
-wordle_words = wordle_words.sort_values("log_likelihood", ascending=False)
+wordle_words = pd.read_csv('Word Data/wordle_words_entropy.csv')
+wordle_words = wordle_words.sort_values("entropy", ascending=False)
 
 known_count = {}
 possible_positions = [list(string.ascii_lowercase),list(string.ascii_lowercase),list(string.ascii_lowercase),list(string.ascii_lowercase),list(string.ascii_lowercase)]
 known_positions = ['','','','','']
-column_pos = [[0,'first'],[1,'second'],[2,'third'],[3,'fourth'],[4,'fifth']]
 
 def make_guess():
     print("Input your chosen guess:")
@@ -58,14 +56,11 @@ def filter_words(word_df):
 
     word_df = word_df[word_df["word"].apply(lambda w: contains_required_letters(w))]
 
-    for x in column_pos:
-        if known_positions[x[0]] != '':
-            word_df = word_df[word_df[x[1]] == known_positions[x[0]]]
-        pattern = f"[^{''.join(possible_positions[x[0]])}]"
-        print(pattern)
-        print(word_df)
-        word_df = word_df[~word_df[x[1]].str.contains(pattern)]
-        print(word_df)
+    for x in range(5):
+        if known_positions[x] != '':
+            word_df = word_df[word_df["word"].str[x] == known_positions[x]]
+        pattern = f"[^{''.join(possible_positions[x])}]"
+        word_df = word_df[~word_df["word"].str[x].str.contains(pattern)]
 
     return word_df
 
@@ -114,3 +109,4 @@ sixth_guess = make_guess()
 check_letters(sixth_guess[0], sixth_guess[1])
 wordle_words = filter_words(wordle_words)
 print()
+
