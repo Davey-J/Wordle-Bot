@@ -11,11 +11,10 @@ This shall be solved for later
 TODO:
 -
 1. Remove the probabilistic bias from the bot based on word frequency [✔]
-2. Create a metric for information gathered from each word as a guess [ ]
-   1. Calculate the probability of a given result when the word is guessed []
-   2. Calculate the information gathered from each given result []
-   3. Calculate an expected information value from the guess given both option []
-   4. Present that to the user []
+2. Create a metric for information gathered from each word as a guess [✔]
+   1. Calculate the probability of a given result when the word is guessed [✔]
+   2. Calculate the information gathered from each given result [✔]
+   3. Calculate an expected information value from the guess given both option [✔]
 3. Present the highest information option to the user []
 4. Take in the result []
 5. Recalculate based on the new information []
